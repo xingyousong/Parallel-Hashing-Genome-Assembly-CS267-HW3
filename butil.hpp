@@ -9,7 +9,7 @@ namespace BUtil {
   void print(std::string format, Args... args) {
     fflush(stdout);
     upcxx::barrier();
-    if (upcxx::rank_me() == 0) {
+    if (upcxx::rank_me() != -1) {
       printf(format.c_str(), args...);
     }
     fflush(stdout);

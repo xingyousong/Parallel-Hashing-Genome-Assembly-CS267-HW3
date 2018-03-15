@@ -53,7 +53,8 @@ size_t line_count(const std::string &fname) {
 // an appropriately sized block portion of the k-mers.
 std::vector <kmer_pair> read_kmers(const std::string &fname, int nprocs = 1, int rank = 0) {
   size_t num_lines = line_count(fname);
-  size_t split = (num_lines + nprocs - 1) / nprocs;
+  //size_t split = (num_lines + nprocs - 1) / nprocs;
+  size_t split = num_lines / nprocs;
   size_t start = split*rank;
   size_t size = std::min(split, num_lines - start);
 
