@@ -21,6 +21,7 @@ using namespace upcxx;
 
 struct LockerTable{
   uint64_t size;
+  uint64_t currentCapacity;
   vector<atomic<char>> is_occupied_slots;
 
   LockerTable(){
@@ -28,13 +29,18 @@ struct LockerTable{
 
   LockerTable(uint64_t size){
     this->size = size;
+    this->currentCapacity = size;
     is_occupied_slots = vector<atomic<char>>(size);
   }
 
   pair<bool, uint64_t> check_slot_available(uint64_t slot_pos){
+    if (currentCapacity == 0){
+      return make_pair(false, slot_pos);
+    }
     uint64_t k = slot_pos;
     while (k < size){
       if (!is_occupied_slots[k].fetch_or(1)){
+        currentCapacity--;
         return make_pair(true, k);
       }
       k++;
