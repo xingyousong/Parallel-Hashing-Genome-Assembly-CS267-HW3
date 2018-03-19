@@ -1,0 +1,16 @@
+Bonus Question 
+
+Q1
+What if we did not have the base F marking the beginning and end of contigs?  Suppose instead we had a random base as an extension whose corresponding k-mer did not exist in the dataset.  How would this affect the contig generation algorithm?  How would it affect the implementation?
+
+Ans:
+Then it will be impossible to know where to start and where to end. In other words, we need to have a separate list telling us which kmer is the starting point and which kmer is the end point. 
+If there is a random base whose kmer is not within our dataset, we have two options. We can either pretend there is one (as we know what that kmer should be) or we just abort the generation of that kmer. In other words, we discard the half-complete kmer and move to the next one. It will not affect my code a lot as the hash map find function will return false if the kmer is not within the dataset and we can simple continue the iteration over the start_kmers  while aborting the current contig.
+
+Q2
+Suppose start k-mers are unevenly distributed throughout the dataset, and this creates a load balancing problem.  How might you deal with this?
+ Ans:
+The idea behind it is to distribute the workload evenly. One simple approach is to let assign a single process as the coordinator and collect all the start_nodes from other peers (including its own). Then, it can evenly split the start_nodes and distribute them to other processes. It is easy to implement but might not be time efficient as a process has to receive and distribute all the start_nodes. 
+
+
+
