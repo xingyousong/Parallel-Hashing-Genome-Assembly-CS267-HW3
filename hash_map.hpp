@@ -5,7 +5,7 @@
 
 struct HashMap {
   std::vector <kmer_pair> data;
-  std::vector <int> used;
+  std::vector <size_t> used;
 
   size_t my_size;
 
