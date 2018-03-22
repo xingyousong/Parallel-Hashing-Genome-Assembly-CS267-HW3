@@ -1,0 +1,23 @@
+General model Power1:
+     f(x) = a*x^b
+Coefficients (with 95% confidence bounds):
+       a =       7.833  (6.53, 9.136)
+       b =     -0.5529  (-0.719, -0.3867)
+
+Goodness of fit:
+  SSE: 1.591
+  R-square: 0.9629
+  Adjusted R-square: 0.9555
+  RMSE: 0.5641
+
+Linear model Poly1:
+     f(x) = p1*x + p2
+Coefficients (with 95% confidence bounds):
+       p1 =    -0.08179  (-0.1773, 0.0137)
+       p2 =       4.708  (2.041, 7.375)
+
+Goodness of fit:
+  SSE: 21.78
+  R-square: 0.4923
+  Adjusted R-square: 0.3908
+  RMSE: 2.087
