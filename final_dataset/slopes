@@ -1,0 +1,8 @@
+slope using 1 core 32 procs
+test -> large		large -> insane
+0.98825145035732	1.0369093924728783
+
+slope using 2 core 64 procs
+test -> large		large -> insane
+1.0989517527400836	1.1018428316198552
+

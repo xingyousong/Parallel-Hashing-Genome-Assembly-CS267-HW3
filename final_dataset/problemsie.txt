@@ -1,0 +1,9 @@
+test:
+nodes:4514197
+contigs:5736
+large:
+nodes:27000544
+contigs:210550
+insane:
+nodes:89710742
+contigs:860329
