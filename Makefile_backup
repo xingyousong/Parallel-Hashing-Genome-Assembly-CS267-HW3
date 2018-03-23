@@ -8,11 +8,9 @@ CXX = CC
 CXXFLAGS = `upcxx-meta PPFLAGS` `upcxx-meta LDFLAGS`
 LDFLAGS = `upcxx-meta LIBFLAGS`
 
+all: kmer_hash hashmap
 
-#all: kmer_hash hashmap
-all: kmer_hash
-
-kmer_hash: kmer_hash.cpp hashmap.h kmer_t.hpp pkmer_t.hpp packing.hpp read_kmers.hpp hash_map.hpp butil.hpp
+kmer_hash: kmer_hash.cpp kmer_t.hpp pkmer_t.hpp packing.hpp read_kmers.hpp hash_map.hpp butil.hpp
 	$(CXX) kmer_hash.cpp -o kmer_hash $(CXXFLAGS) $(LDFLAGS)
 
 hashmap: hashmap.cpp hashmap.h kmer_t.hpp pkmer_t.hpp packing.hpp read_kmers.hpp butil.hpp
