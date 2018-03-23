@@ -232,12 +232,12 @@ int main(int argc, char **argv) {
   //Create pointers, set variables, etc.
   houseKeeping(kmer_fname);
 
-  if (run_type != "test"){
+  if (run_type == "verbose"){
     BUtil::print("Process %d: hashMapSize %d, averageOffset %d, myOffset %d, mySize %d, myLockerTable size: %d \n",
       rank_me(), hashMapSize, averageOffset, myOffset, mySize, myLockerTable.size);
   }
 
-  if (run_type != "test"){
+  if (run_type == "verbose"){
     for (int i = 0; i < rank_n(); i++){
       BUtil::print("Process %d: Process %d is in charge of %d slots \n", rank_me(), i, local_meta_data[i]);
     }
@@ -247,7 +247,7 @@ int main(int argc, char **argv) {
   /* --- Read kmers from the files --- */
   //Each process reads a portion of it
   vector<kmer_pair> kmer_vocabulary = my_read_kmers(kmer_fname, upcxx::rank_n(), upcxx::rank_me());
-  if (run_type != "test") {
+  if (run_type == "verbose") {
     BUtil::print("Process %d: initializing hash table of size %d for %d kmers.\n",
       rank_me(), mySize, kmer_vocabulary.size());
   }
@@ -261,7 +261,7 @@ int main(int argc, char **argv) {
   upcxx::barrier();
 
   double insert_time = std::chrono::duration <double> (end_insert - start).count();
-  if (run_type != "test") {
+  if (run_type == "verbose") {
     BUtil::print("Process %d: finished inserting in %lf\n", rank_me(), insert_time);
     BUtil::print("Process %d: has %d start_nodes \n", rank_me(), start_nodes.size());
   }
@@ -297,11 +297,11 @@ int main(int argc, char **argv) {
       return sum + contig.size();
     });
 
-  if (run_type != "test") {
+  if (run_type == "test") {
     BUtil::print("Assembled in %lf total\n", total.count());
   }
 
-  if (run_type == "test") {
+  if (run_type == "verbose") {
     BUtil::print("Rank %d reconstructed %d contigs with %d nodes from %d start nodes."
       " (%lf read, %lf insert, %lf total)\n", upcxx::rank_me(), contigs.size(),
       numKmers, start_nodes.size(), read.count(), insert.count(), total.count());
