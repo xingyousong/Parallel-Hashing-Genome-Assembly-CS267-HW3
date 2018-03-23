@@ -297,7 +297,7 @@ int main(int argc, char **argv) {
       return sum + contig.size();
     });
 
-  if (run_type == "test") {
+  if (run_type != "test") {
     BUtil::print("Assembled in %lf total\n", total.count());
   }
 
